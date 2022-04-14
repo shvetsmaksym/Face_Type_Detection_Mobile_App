@@ -4,7 +4,7 @@ from kivy.lang import Builder
 from kivy.core.window import Window
 import time
 
-Builder.load_file('C:/Users/Евгей/PycharmProjects/pythonProject/menu.kv')
+Builder.load_file('D:/fronted2.kv')
 
 class MenuScreen(Screen):
     Window.size = (500, 700)
