@@ -1,0 +1,94 @@
+
+<MenuScreen>:
+    canvas.before:
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: 'D:/Finished_background.jpeg'
+    FloatLayout:
+        RoundedButton1:
+            pos_hint: {'center_x': 0.25, 'center_y': 0.2}
+            size_hint: 0.45, 0.07
+            font_size: 0.08 * self.width
+            bold: True
+            text: 'TAKE A PHOTO'
+            back_color:(0,0,0,1)
+
+            on_press: root.manager.current = 'camera'
+
+        RoundedButton2:
+            pos_hint: {'center_x': 0.75, 'center_y': 0.2}
+            size_hint: 0.45, 0.07
+            font_size: 0.08 * self.width
+            bold: True
+            text: 'CHOOSE FROM\nGALLERY'
+            halign: 'center'
+            back_color:(0,0,0,1)
+            on_press: root.manager.current = 'gallery_upload'
+
+        Image:
+            source: 'D:/Title.png'
+            allow_stretch: True
+
+<RoundedButton1@Button>
+    background_color: (0, 0, 0, 0)
+    background_normal: ''
+    back_color: (1,0,1,1)
+    border_radius: 20
+    color: self.back_color
+    bold: True
+    canvas.before:
+        Color:
+            rgba: self.back_color
+        Line:
+            rounded_rectangle: (self.pos[0], self.pos[1], self.size[0], self.size[1], self.border_radius)
+            width: 1.2
+<RoundedButton2@Button>
+    background_color: (0, 0, 0, 0)
+    background_normal: ''
+    back_color: (1,0,1,1)
+    border_radius: [20]
+    canvas.before:
+        Color:
+            rgba: self.back_color
+        RoundedRectangle:
+            size:self.size
+            pos: self.pos
+            radius: self.border_radius
+
+
+<TakePhotoScreen>:
+    orientation: 'vertical'
+    Camera:
+        id: camera
+        resolution: (500, 700)
+        allow_stretch: True
+        keep_ratio: True
+        play: True
+    Button:
+        id: button
+        pos_hint: {'center_x': 0.5, 'center_y': 0.20}
+        text: 'Capture'
+        size_hint: 0.11, 0.12
+        height: '48dp'
+        on_press: root.capture()
+        background_color: 0,0,0,0
+        Image:
+            source: 'D:/kamera.png'
+            center_x: self.parent.center_x
+            center_y: self.parent.center_y
+
+<GaleryUploadScreen>:
+    id:galeryuploadscreen
+    BoxLayout:
+        orientation: "vertical"
+        size: root.width, root.height
+
+        padding: 50
+        spacing: 20
+        Image:
+            id: my_image
+            source: ""
+        FileChooserIconView:
+            id: filechooser
+            on_selection: galeryuploadscreen.selected(filechooser.selection)
