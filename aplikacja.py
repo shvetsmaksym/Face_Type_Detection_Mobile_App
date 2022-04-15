@@ -4,11 +4,14 @@ from kivy.lang import Builder
 from kivy.core.window import Window
 import time
 
-Builder.load_file('D:/fronted2.kv')
+Builder.load_file('Layout_Files/fronted2.kv')
+
 
 class MenuScreen(Screen):
     Window.size = (500, 700)
     pass
+
+
 class GaleryUploadScreen(Screen):
     def selected(self, filename):
         try:
@@ -34,6 +37,7 @@ class GlassesApp(App):
         sm.add_widget(TakePhotoScreen(name='camera'))
 
         return sm
+
 
 if __name__ == '__main__':
     GlassesApp().run()
