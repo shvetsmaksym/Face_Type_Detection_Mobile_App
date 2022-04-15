@@ -1,5 +1,6 @@
-kivy=2.0.0
-tensorflow=2.6.2
-numpy=1.19.5
-matplotlib=3.3.4
-scipy=1.5.4
+kivy==2.0.0
+tensorflow==2.6.2
+numpy==1.19.5
+matplotlib==3.3.4
+scipy==1.5.4
+opencv-python

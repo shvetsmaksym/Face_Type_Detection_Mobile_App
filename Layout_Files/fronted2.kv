@@ -4,7 +4,7 @@
         Rectangle:
             pos: self.pos
             size: self.size
-            source: 'D:/Finished_background.jpeg'
+            source: 'Layout_Files/Images/Finished_background.jpeg'
     FloatLayout:
         RoundedButton1:
             pos_hint: {'center_x': 0.25, 'center_y': 0.2}
@@ -27,7 +27,7 @@
             on_press: root.manager.current = 'gallery_upload'
 
         Image:
-            source: 'D:/Title.png'
+            source: 'Layout_Files/Images/Title.png'
             allow_stretch: True
 
 <RoundedButton1@Button>
@@ -74,7 +74,7 @@
         on_press: root.capture()
         background_color: 0,0,0,0
         Image:
-            source: 'D:/kamera.png'
+            source: 'Layout_Files/Images/kamera.png'
             center_x: self.parent.center_x
             center_y: self.parent.center_y
 
