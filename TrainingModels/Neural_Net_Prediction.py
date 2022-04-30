@@ -13,8 +13,8 @@ def make_prediction(img_path, model_path='TrainingModels\models_h5\CNN_2.h5'):
     img = preprocess_input(img)
 
     pred = model.predict(img)
-    print("Your type of face is {}.".format(classes[np.argmax(pred)]))
-    return
+    return "Your type of face is {}.".format(classes[np.argmax(pred)])
+
 
 
 if __name__ == "__main__":
