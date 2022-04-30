@@ -83,12 +83,33 @@
     BoxLayout:
         orientation: "vertical"
         size: root.width, root.height
-
         padding: 50
         spacing: 20
         Image:
             id: my_image
             source: ""
+
         FileChooserIconView:
             id: filechooser
             on_selection: galeryuploadscreen.selected(filechooser.selection)
+
+        Button:
+            id: button4
+            pos_hint: {'center_x': 0.25, 'center_y': 0.50}
+            text: 'Predict face type'
+            color: 0,0,1,1
+            size_hint: 0.45, 0.07
+            font_size: 0.08 * self.width
+            bold: True
+            back_color:(0,0,0,1)
+            on_press: galeryuploadscreen.predict()
+
+        Label:
+            id: face_type_label
+            pos_hint: {'center_x': 0.75, 'center_y': 0.50}
+            text: "Waiting for your photo..."
+            color: 1,1,0,1
+            size_hint: 0.45, 0.07
+            font_size: 0.08 * self.width
+            bold: True
+            back_color:(0,0,0,1)
