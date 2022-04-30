@@ -49,7 +49,7 @@ class GlassesApp(App):
         sm = ScreenManager()
         sm.add_widget(MenuScreen(name='menu'))
         sm.add_widget(GaleryUploadScreen(name='gallery_upload'))
-        # sm.add_widget(PredictionScreen(name="predict_face_type"))
+        sm.add_widget(PredictionScreen(name="predict_face_type"))
         # sm.add_widget(TakePhotoScreen(name='take_photo'))
 
         return sm
