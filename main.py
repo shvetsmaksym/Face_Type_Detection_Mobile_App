@@ -71,7 +71,6 @@ class GlassesApp(App):
         sm.add_widget(ShowPhotoScreen(name='show_photo'))
         sm.add_widget(PredictionScreen(name="predict_face_type"))
 
-
         return sm
 
 
