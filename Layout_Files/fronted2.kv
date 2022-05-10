@@ -13,8 +13,7 @@
             bold: True
             text: 'TAKE A PHOTO'
             back_color:(0,0,0,1)
-
-            on_press: root.manager.current = 'camera'
+            on_press: root.manager.current = 'make_photo'
 
         RoundedButton2:
             pos_hint: {'center_x': 0.75, 'center_y': 0.2}
@@ -43,6 +42,7 @@
         Line:
             rounded_rectangle: (self.pos[0], self.pos[1], self.size[0], self.size[1], self.border_radius)
             width: 1.2
+
 <RoundedButton2@Button>
     background_color: (0, 0, 0, 0)
     background_normal: ''
@@ -57,7 +57,8 @@
             radius: self.border_radius
 
 
-<TakePhotoScreen>:
+<MakePhotoScreen>:
+    id: make_photo
     orientation: 'vertical'
     Camera:
         id: camera
@@ -65,21 +66,47 @@
         allow_stretch: True
         keep_ratio: True
         play: True
+
     Button:
-        id: button
+        id: button1
         pos_hint: {'center_x': 0.5, 'center_y': 0.20}
         text: 'Capture'
         size_hint: 0.11, 0.12
         height: '48dp'
-        on_press: root.capture()
         background_color: 0,0,0,0
+        on_press:
+            root.capture()
+            root.manager.current = 'show_photo'
+
         Image:
             source: 'Layout_Files/Images/kamera.png'
             center_x: self.parent.center_x
             center_y: self.parent.center_y
 
-<GaleryUploadScreen>:
-    id:galeryuploadscreen
+<ShowPhotoScreen>:
+    id: show_photo
+    Image:
+        id: my_image
+        pos_hint: {'center_x': 0.5, 'center_y': 0.9}
+        source: ""
+
+    Button:
+        id: button2
+        pos_hint: {'center_x': 0.5, 'center_y': 0.1}
+        text: 'Determine my face type'
+        color: 0,0,1,1
+        size_hint: 0.45, 0.07
+        font_size: 0.08 * self.width
+        bold: True
+        back_color:(0,0,0,1)
+        on_press:
+            root.manager.current = 'predict_face_type'
+            root.manager.get_screen('predict_face_type').ids.my_image.source = root.ids.my_image.source
+            root.manager.get_screen('predict_face_type').predict()
+
+
+<GalleryUploadScreen>:
+    id: gallery_upload
     BoxLayout:
         orientation: "vertical"
         size: root.width, root.height
@@ -90,20 +117,36 @@
             source: ""
 
         FileChooserIconView:
-            id: filechooser
-            on_selection: galeryuploadscreen.selected(filechooser.selection)
+            id: file_chooser
+            on_selection:
+                gallery_upload.selected(file_chooser.selection)
+                root.manager.get_screen('predict_face_type').selected(file_chooser.selection)
 
         Button:
             id: button4
             pos_hint: {'center_x': 0.25, 'center_y': 0.50}
-            text: 'Predict face type'
+            text: 'Determine my face type'
             color: 0,0,1,1
             size_hint: 0.45, 0.07
             font_size: 0.08 * self.width
             bold: True
             back_color:(0,0,0,1)
-            on_press: galeryuploadscreen.predict()
+            on_press:
+                root.manager.current = 'predict_face_type'
+                root.manager.get_screen('predict_face_type').predict()
 
+
+
+<PredictionScreen>:
+    id: predict_face_type
+    BoxLayout:
+        orientation: "vertical"
+        size: root.width, root.height
+        padding: 50
+        spacing: 20
+        Image:
+            id: my_image
+            source: ""
         Label:
             id: face_type_label
             pos_hint: {'center_x': 0.75, 'center_y': 0.50}
