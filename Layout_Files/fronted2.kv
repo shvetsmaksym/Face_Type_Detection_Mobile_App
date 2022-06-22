@@ -100,9 +100,9 @@
         bold: True
         back_color:(0,0,0,1)
         on_press:
-            root.manager.current = 'predict_face_type'
-            root.manager.get_screen('predict_face_type').ids.my_image.source = root.ids.my_image.source
-            root.manager.get_screen('predict_face_type').predict()
+            root.manager.current = 'glasses_screen'
+            root.manager.get_screen('glasses_screen').ids.my_image.source = root.ids.my_image.source
+            root.manager.get_screen('glasses_screen').predict()
 
 
 <GalleryUploadScreen>:
@@ -120,25 +120,25 @@
             id: file_chooser
             on_selection:
                 gallery_upload.selected(file_chooser.selection)
-                root.manager.get_screen('predict_face_type').selected(file_chooser.selection)
+                root.manager.get_screen('glasses_screen').selected(file_chooser.selection)
 
         Button:
             id: button4
             pos_hint: {'center_x': 0.25, 'center_y': 0.50}
-            text: 'Determine my face type'
+            text: 'Predict face shape and find googles for it'
             color: 0,0,1,1
-            size_hint: 0.45, 0.07
+            size_hint: 0.55, 0.07
             font_size: 0.08 * self.width
             bold: True
             back_color:(0,0,0,1)
             on_press:
-                root.manager.current = 'predict_face_type'
-                root.manager.get_screen('predict_face_type').predict()
+                root.manager.current = 'glasses_screen'
+                root.manager.get_screen('glasses_screen').predict()
 
 
 
-<PredictionScreen>:
-    id: predict_face_type
+<GlassesScreen>:
+    id: glasses_screen
     BoxLayout:
         orientation: "vertical"
         size: root.width, root.height
@@ -156,3 +156,43 @@
             font_size: 0.08 * self.width
             bold: True
             back_color:(0,0,0,1)
+
+        BoxLayout:
+            orientation: "horizontal"
+            Button:
+                id: button_glasses_0
+                text: "Select"
+                on_press:
+                    root.manager.get_screen('glasses_screen').add_glasses_to_img(0)
+                background_normal: ""
+                size_hint: .3, .2
+                pos_hint: {"x":.3, "y":.3}
+
+            Button:
+                id: button_glasses_1
+                text: "Select"
+                on_press:
+                    root.manager.get_screen('glasses_screen').add_glasses_to_img(1)
+                background_normal: ""
+                size_hint: .3, .2
+                pos_hint: {"x":.3, "y":.3}
+
+            Button:
+                id: button_glasses_2
+                text: "Select"
+                on_press:
+                    root.manager.get_screen('glasses_screen').add_glasses_to_img(2)
+                background_normal: ""
+                size_hint: .3, .2
+                pos_hint: {"x":.3, "y":.3}
+
+            Button:
+                id: button_glasses_3
+                text: "Select"
+                on_press:
+                    root.manager.get_screen('glasses_screen').add_glasses_to_img(3)
+                background_normal: ""
+                size_hint: .3, .2
+                pos_hint: {"x":.3, "y":.3}
+
+
