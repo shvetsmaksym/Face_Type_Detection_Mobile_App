@@ -19,7 +19,7 @@ def make_prediction(img_path, model_path='TrainingModels\models_h5\CNN_2.h5'):
         # processed_img = preprocess_input(processed_img)
 
         pred = model.predict(processed_img)
-        return "Your type of face is {}.".format(classes[np.argmax(pred)])
+        return classes[np.argmax(pred)]
     else:
         print("Can't process image.")
 
