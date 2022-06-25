@@ -82,6 +82,17 @@
             source: 'Layout_Files/Images/kamera.png'
             center_x: self.parent.center_x
             center_y: self.parent.center_y
+    Button:
+        id: button2
+        pos_hint: {'center_x': 0.1, 'center_y': 0.05}
+        size_hint: 0.1, 0.1
+        font_size: 0.4 * self.width
+        text: 'Back'
+        halign: 'center'
+        valign: 'center'
+        background_color: 0, 0, 0, 0
+        color: 1,1,1,1
+        on_press: root.manager.current = 'menu'
 
 <ShowPhotoScreen>:
     id: show_photo
@@ -103,6 +114,17 @@
             root.manager.current = 'glasses_screen'
             root.manager.get_screen('glasses_screen').ids.my_image.source = root.ids.my_image.source
             root.manager.get_screen('glasses_screen').predict()
+    Button:
+        id: button6
+        pos_hint: {'center_x': 0.1, 'center_y': 0.05}
+        size_hint: 0.1, 0.1
+        font_size: 0.4 * self.width
+        text: 'Back'
+        halign: 'center'
+        valign: 'center'
+        background_color: 0, 0, 0, 0
+        color: 1,1,1,1
+        on_press: root.manager.current = 'make_photo'
 
 
 <GalleryUploadScreen>:
@@ -124,16 +146,27 @@
 
         Button:
             id: button4
-            pos_hint: {'center_x': 0.25, 'center_y': 0.50}
-            text: 'Predict face shape and find googles for it'
+            pos_hint: {'center_x': 0.5, 'center_y': 0.50}
+            text: 'Predict'
             color: 0,0,1,1
-            size_hint: 0.55, 0.07
+            size_hint: 0.55, 0.1
             font_size: 0.08 * self.width
             bold: True
             back_color:(0,0,0,1)
             on_press:
                 root.manager.current = 'glasses_screen'
                 root.manager.get_screen('glasses_screen').predict()
+    Button:
+        id: button5
+        pos_hint: {'center_x': 0.1, 'center_y': 0.05}
+        size_hint: 0.1, 0.1
+        font_size: 0.4 * self.width
+        text: 'Back'
+        halign: 'center'
+        valign: 'center'
+        background_color: 0, 0, 0, 0
+        color: 1,1,1,1
+        on_press: root.manager.current = 'menu'
 
 
 
@@ -194,5 +227,16 @@
                 background_normal: ""
                 size_hint: .3, .2
                 pos_hint: {"x":.3, "y":.3}
+    Button:
+        id: button5
+        pos_hint: {'center_x': 0.05, 'center_y': 0.05}
+        size_hint: 0.05, 0.05
+        font_size: 0.4 * self.width
+        text: 'Menu'
+        halign: 'center'
+        valign: 'center'
+        background_color: 0, 0, 0, 0
+        color: 1,1,1,1
+        on_press: root.manager.current = 'menu'
 
 
