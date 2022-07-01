@@ -106,7 +106,7 @@ class GlassesApp(App):
 
 
 if __name__ == '__main__':
-    '''if os.listdir(TMP_PATH):
+    if os.listdir(TMP_PATH):
         for filename in os.listdir(TMP_PATH):
-            os.remove(os.path.join(TMP_PATH, filename))'''
+            os.remove(os.path.join(TMP_PATH, filename))
     GlassesApp().run()
