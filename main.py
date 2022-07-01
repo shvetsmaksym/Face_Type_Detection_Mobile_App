@@ -100,7 +100,6 @@ class GlassesApp(App):
         sm.add_widget(MakePhotoScreen(name='make_photo'))
         sm.add_widget(ShowPhotoScreen(name='show_photo'))
         sm.add_widget(GlassesScreen(name="glasses_screen"))
-        sm.current = "glasses_screen"
 
         return sm
 
