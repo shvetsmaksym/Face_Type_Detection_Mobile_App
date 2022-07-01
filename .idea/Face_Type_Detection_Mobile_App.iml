@@ -9,8 +9,9 @@
       <excludeFolder url="file://$MODULE_DIR$/TrainingModels/Data/testing_set" />
       <excludeFolder url="file://$MODULE_DIR$/TrainingModels/Data/training_set" />
       <excludeFolder url="file://$MODULE_DIR$/saved_images" />
+      <excludeFolder url="file://$MODULE_DIR$/.ipynb_checkpoints" />
     </content>
-    <orderEntry type="jdk" jdkName="Python 3.7 (Face_Type_Detection)" jdkType="Python SDK" />
+    <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
 </module>

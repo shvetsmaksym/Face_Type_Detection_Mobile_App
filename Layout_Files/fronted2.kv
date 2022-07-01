@@ -82,58 +82,83 @@
             source: 'Layout_Files/Images/kamera.png'
             center_x: self.parent.center_x
             center_y: self.parent.center_y
-    Button:
+    RoundedButton1:
         id: button2
-        pos_hint: {'center_x': 0.1, 'center_y': 0.05}
-        size_hint: 0.1, 0.1
-        font_size: 0.4 * self.width
-        text: 'Back'
+        pos_hint: {'center_x': 0.5, 'center_y': 0.1}
+        size_hint: 0.45, 0.07
+        font_size: 0.08 * self.width
+        text: 'Back to menu'
         halign: 'center'
         valign: 'center'
-        background_color: 0, 0, 0, 0
-        color: 1,1,1,1
+        back_color: (1, 1, 1, 1)
         on_press: root.manager.current = 'menu'
 
 <ShowPhotoScreen>:
     id: show_photo
-    Image:
-        id: my_image
-        pos_hint: {'center_x': 0.5, 'center_y': 0.9}
-        source: ""
+    FloatLayout:
+        Image:
+            id: my_image
+            pos_hint: {'center_x': 0.5, 'center_y': 0.9}
+            source: ""
+        DetermineButton:
+            pos_hint: {'center_x': 0.5, 'center_y': 0.3}
+            size_hint: 0.45, 0.07
+            font_size: 0.08 * self.width
+            bold: True
+            text: 'Determine my face type'
+            back_color:(0,0,0,1)
+            on_press:
+                root.manager.current = 'glasses_screen'
+                root.manager.get_screen('glasses_screen').ids.my_image.source = root.ids.my_image.source
+                root.manager.get_screen('glasses_screen').base_img_path = root.ids.my_image.source
+                root.manager.get_screen('glasses_screen').predict()
 
-    Button:
-        id: button2
-        pos_hint: {'center_x': 0.5, 'center_y': 0.1}
-        text: 'Determine my face type'
-        color: 0,0,1,1
+    RoundedButton1:
+        id: button6
+        pos_hint: {'center_x': 0.5, 'center_y': 0.2}
         size_hint: 0.45, 0.07
         font_size: 0.08 * self.width
-        bold: True
-        back_color:(0,0,0,1)
-        on_press:
-            root.manager.current = 'glasses_screen'
-            root.manager.get_screen('glasses_screen').ids.my_image.source = root.ids.my_image.source
-            root.manager.get_screen('glasses_screen').predict()
-    Button:
-        id: button6
-        pos_hint: {'center_x': 0.1, 'center_y': 0.05}
-        size_hint: 0.1, 0.1
-        font_size: 0.4 * self.width
-        text: 'Back'
+        text: 'Take new photo'
         halign: 'center'
         valign: 'center'
-        background_color: 0, 0, 0, 0
-        color: 1,1,1,1
+        back_color: (1,1,1,1)
         on_press: root.manager.current = 'make_photo'
+    RoundedButton1:
+        id: button6
+        pos_hint: {'center_x': 0.5, 'center_y': 0.1}
+        size_hint: 0.45, 0.07
+        font_size: 0.08 * self.width
+        text: 'Back to menu'
+        halign: 'center'
+        valign: 'center'
+        back_color: (1,1,1,1)
+        on_press: root.manager.current = 'menu'
 
-
+<DetermineButton@Button>
+    background_color: (1, 1, 1, 1)
+    background_normal: ''
+    back_color: (1,1,1,1)
+    border_radius: 20
+    color: self.back_color
+    bold: True
+    canvas.before:
+        Color:
+            rgba: self.back_color
+        Line:
+            rounded_rectangle: (self.pos[0], self.pos[1], self.size[0], self.size[1], self.border_radius)
+            width: 1.2
 <GalleryUploadScreen>:
     id: gallery_upload
+    canvas.before:
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: 'Layout_Files/Images/Finished_background.jpeg'
     BoxLayout:
         orientation: "vertical"
         size: root.width, root.height
-        padding: 50
-        spacing: 20
+        padding: 80
+        spacing: 60
         Image:
             id: my_image
             source: ""
@@ -144,32 +169,53 @@
                 gallery_upload.selected(file_chooser.selection)
                 root.manager.get_screen('glasses_screen').selected(file_chooser.selection)
 
-        Button:
-            id: button4
-            pos_hint: {'center_x': 0.5, 'center_y': 0.50}
-            text: 'Predict'
-            color: 0,0,1,1
-            size_hint: 0.55, 0.1
-            font_size: 0.08 * self.width
-            bold: True
-            back_color:(0,0,0,1)
-            on_press:
-                root.manager.current = 'glasses_screen'
-                root.manager.get_screen('glasses_screen').predict()
-    Button:
-        id: button5
-        pos_hint: {'center_x': 0.1, 'center_y': 0.05}
-        size_hint: 0.1, 0.1
-        font_size: 0.4 * self.width
-        text: 'Back'
+    PredictButton:
+        pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+        id:button 4
+        size_hint: 0.3, 0.07
+        font_size: 0.15 * self.width
+        bold: True
+        text: 'Predict'
+        back_color:(0,0,0,1)
+        on_press:
+            root.manager.current = 'glasses_screen'
+            root.manager.get_screen('glasses_screen').predict()
+    BackButton:
+        pos_hint: {'center_x': 0.5, 'center_y': 0.07}
+        size_hint: 0.45, 0.07
+        font_size: 0.08 * self.width
+        bold: True
+        text: 'Back to menu'
         halign: 'center'
-        valign: 'center'
-        background_color: 0, 0, 0, 0
-        color: 1,1,1,1
+        back_color:(0,0,0,1)
         on_press: root.manager.current = 'menu'
 
 
-
+<PredictButton@Button>
+    background_color: (0, 0, 0, 0)
+    background_normal: ''
+    back_color: (1,0,1,1)
+    border_radius: 20
+    color: self.back_color
+    bold: True
+    canvas.before:
+        Color:
+            rgba: self.back_color
+        Line:
+            rounded_rectangle: (self.pos[0], self.pos[1], self.size[0], self.size[1], self.border_radius)
+            width: 1.2
+<BackButton@Button>
+    background_color: (0, 0, 0, 0)
+    background_normal: ''
+    back_color: (1,0,1,1)
+    border_radius: [20]
+    canvas.before:
+        Color:
+            rgba: self.back_color
+        RoundedRectangle:
+            size:self.size
+            pos: self.pos
+            radius: self.border_radius
 <GlassesScreen>:
     id: glasses_screen
     BoxLayout:
@@ -182,9 +228,18 @@
             source: ""
         Label:
             id: face_type_label
-            pos_hint: {'center_x': 0.75, 'center_y': 0.50}
+            pos_hint: {'center_x': 0.5, 'center_y': 0.50}
             text: "Waiting for your photo..."
-            color: 1,1,0,1
+            color: 1,1,1,1
+            size_hint: 0.45, 0.07
+            font_size: 0.08 * self.width
+            bold: True
+            back_color:(0,0,0,1)
+        Label:
+            id: face_type_label
+            pos_hint: {'center_x': 0.5, 'center_y': 0.3}
+            text: "Example glasses for your face shape:"
+            color: 1,1,1,1
             size_hint: 0.45, 0.07
             font_size: 0.08 * self.width
             bold: True
@@ -227,16 +282,15 @@
                 background_normal: ""
                 size_hint: .3, .2
                 pos_hint: {"x":.3, "y":.3}
-    Button:
-        id: button5
-        pos_hint: {'center_x': 0.05, 'center_y': 0.05}
-        size_hint: 0.05, 0.05
-        font_size: 0.4 * self.width
-        text: 'Menu'
+    RoundedButton1:
+        id: button2
+        pos_hint: {'center_x': 0.5, 'center_y': 0.1}
+        size_hint: 0.45, 0.07
+        font_size: 0.08 * self.width
+        text: 'Back to menu'
         halign: 'center'
         valign: 'center'
-        background_color: 0, 0, 0, 0
-        color: 1,1,1,1
+        back_color: (1, 1, 1, 1)
         on_press: root.manager.current = 'menu'
 
 

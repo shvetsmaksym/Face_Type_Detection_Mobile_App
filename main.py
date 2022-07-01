@@ -33,7 +33,7 @@ class MakePhotoScreen(Screen):
         camera = self.ids['camera']
 
         timestr = time.strftime("%Y%m%d_%H%M%S")
-        path = f"saved_images/IMG_{timestr}.png"
+        path = f"{TMP_PATH}/IMG_{timestr}.png"
         camera.export_to_png(path)
         print("Captured")
 
@@ -105,11 +105,7 @@ class GlassesApp(App):
 
 
 if __name__ == '__main__':
-    # Create empty temp dir for images with glasses or clear temp dir if it already exists
-    if not os.path.exists(TMP_PATH):
-        os.mkdir(TMP_PATH)
-    for filename in os.listdir(TMP_PATH):
-        os.remove(os.path.join(TMP_PATH, filename))
-
-    # Run app
+    if os.listdir(TMP_PATH):
+        for filename in os.listdir(TMP_PATH):
+            os.remove(os.path.join(TMP_PATH, filename))
     GlassesApp().run()

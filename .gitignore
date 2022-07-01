@@ -2,9 +2,9 @@
 TrainingModels/Data/
 saved_images/
 GlassManipulations/tmp/*.png
+.ipynb_checkpoints/
 
 
 # files
 *.jpg
 *.ini
-*.ipynb
