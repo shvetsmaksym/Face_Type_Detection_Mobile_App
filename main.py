@@ -33,7 +33,7 @@ class MakePhotoScreen(Screen):
         camera = self.ids['camera']
 
         timestr = time.strftime("%Y%m%d_%H%M%S")
-        path = f"saved_images/IMG_{timestr}.png"
+        path = f"{TMP_PATH}/IMG_{timestr}.png"
         camera.export_to_png(path)
         print("Captured")
 

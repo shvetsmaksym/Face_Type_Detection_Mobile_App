@@ -110,6 +110,7 @@
             on_press:
                 root.manager.current = 'glasses_screen'
                 root.manager.get_screen('glasses_screen').ids.my_image.source = root.ids.my_image.source
+                root.manager.get_screen('glasses_screen').base_img_path = root.ids.my_image.source
                 root.manager.get_screen('glasses_screen').predict()
 
     RoundedButton1:
