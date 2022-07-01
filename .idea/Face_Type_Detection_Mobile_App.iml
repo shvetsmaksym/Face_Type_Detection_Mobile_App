@@ -10,7 +10,7 @@
       <excludeFolder url="file://$MODULE_DIR$/TrainingModels/Data/training_set" />
       <excludeFolder url="file://$MODULE_DIR$/saved_images" />
     </content>
-    <orderEntry type="jdk" jdkName="Python 3.7 (Face_Type_Detection)" jdkType="Python SDK" />
+    <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
 </module>

@@ -100,16 +100,13 @@ class GlassesApp(App):
         sm.add_widget(MakePhotoScreen(name='make_photo'))
         sm.add_widget(ShowPhotoScreen(name='show_photo'))
         sm.add_widget(GlassesScreen(name="glasses_screen"))
+        sm.current = "glasses_screen"
 
         return sm
 
 
 if __name__ == '__main__':
-    # Create empty temp dir for images with glasses or clear temp dir if it already exists
-    if not os.path.exists(TMP_PATH):
-        os.mkdir(TMP_PATH)
-    for filename in os.listdir(TMP_PATH):
-        os.remove(os.path.join(TMP_PATH, filename))
-
-    # Run app
+    '''if os.listdir(TMP_PATH):
+        for filename in os.listdir(TMP_PATH):
+            os.remove(os.path.join(TMP_PATH, filename))'''
     GlassesApp().run()
