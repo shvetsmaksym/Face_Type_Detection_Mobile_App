@@ -4,12 +4,12 @@
     <content url="file://$MODULE_DIR$">
       <excludeFolder url="file://$MODULE_DIR$/venv" />
       <excludeFolder url="file://$MODULE_DIR$/GlassManipulations/tmp" />
-      <excludeFolder url="file://$MODULE_DIR$/TrainingModels/Data" />
-      <excludeFolder url="file://$MODULE_DIR$/TrainingModels/Data/Processed" />
-      <excludeFolder url="file://$MODULE_DIR$/TrainingModels/Data/testing_set" />
-      <excludeFolder url="file://$MODULE_DIR$/TrainingModels/Data/training_set" />
       <excludeFolder url="file://$MODULE_DIR$/saved_images" />
       <excludeFolder url="file://$MODULE_DIR$/.ipynb_checkpoints" />
+      <excludeFolder url="file://$MODULE_DIR$/ImageProcessingAndPrediction/Data" />
+      <excludeFolder url="file://$MODULE_DIR$/ImageProcessingAndPrediction/Data/Processed" />
+      <excludeFolder url="file://$MODULE_DIR$/ImageProcessingAndPrediction/Data/testing_set" />
+      <excludeFolder url="file://$MODULE_DIR$/ImageProcessingAndPrediction/Data/training_set" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
