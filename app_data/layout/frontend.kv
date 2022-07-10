@@ -1,0 +1,300 @@
+
+<MenuScreen>:
+    id: menu_screen
+    canvas.before:
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: root.menu_background_source
+    FloatLayout:
+        RoundedButton1:
+            pos_hint: {'center_x': 0.25, 'center_y': 0.2}
+            size_hint: 0.45, 0.07
+            font_size: 0.08 * self.width
+            bold: True
+            text: 'TAKE A PHOTO'
+            back_color:(0,0,0,1)
+            on_press: root.manager.current = 'make_photo'
+
+        RoundedButton2:
+            pos_hint: {'center_x': 0.75, 'center_y': 0.2}
+            size_hint: 0.45, 0.07
+            font_size: 0.08 * self.width
+            bold: True
+            text: 'CHOOSE FROM\nGALLERY'
+            halign: 'center'
+            back_color:(0,0,0,1)
+            on_press: root.manager.current = 'gallery_upload'
+
+        Image:
+            id: title_image
+            allow_stretch: True
+            source: root.title_image_source
+
+<RoundedButton1@Button>
+    background_color: (0, 0, 0, 0)
+    background_normal: ''
+    back_color: (1,0,1,1)
+    border_radius: 20
+    color: self.back_color
+    bold: True
+    canvas.before:
+        Color:
+            rgba: self.back_color
+        Line:
+            rounded_rectangle: (self.pos[0], self.pos[1], self.size[0], self.size[1], self.border_radius)
+            width: 1.2
+
+<RoundedButton2@Button>
+    background_color: (0, 0, 0, 0)
+    background_normal: ''
+    back_color: (1,0,1,1)
+    border_radius: [20]
+    canvas.before:
+        Color:
+            rgba: self.back_color
+        RoundedRectangle:
+            size:self.size
+            pos: self.pos
+            radius: self.border_radius
+
+
+<MakePhotoScreen>:
+    id: make_photo
+    orientation: 'vertical'
+    Camera:
+        id: camera
+        resolution: (500, 700)
+        allow_stretch: True
+        keep_ratio: True
+        play: True
+
+    Button:
+        id: button1
+        pos_hint: {'center_x': 0.5, 'center_y': 0.20}
+        text: 'Capture'
+        size_hint: 0.11, 0.12
+        height: '48dp'
+        background_color: 0,0,0,0
+        on_press:
+            root.capture()
+            root.manager.current = 'show_photo'
+
+        Image:
+            id: camera_image
+            center_x: self.parent.center_x
+            center_y: self.parent.center_y
+            source: root.camera_image_source
+    RoundedButton1:
+        id: button2
+        pos_hint: {'center_x': 0.5, 'center_y': 0.1}
+        size_hint: 0.45, 0.07
+        font_size: 0.08 * self.width
+        text: 'Back to menu'
+        halign: 'center'
+        valign: 'center'
+        back_color: (1, 1, 1, 1)
+        on_press: root.manager.current = 'menu'
+
+<ShowPhotoScreen>:
+    id: show_photo
+    FloatLayout:
+        Image:
+            id: my_image
+            pos_hint: {'center_x': 0.5, 'center_y': 0.9}
+            source: ""
+        DetermineButton:
+            pos_hint: {'center_x': 0.5, 'center_y': 0.3}
+            size_hint: 0.45, 0.07
+            font_size: 0.08 * self.width
+            bold: True
+            text: 'Determine my face type'
+            back_color:(0,0,0,1)
+            on_press:
+                root.manager.current = 'glasses_screen'
+                root.manager.get_screen('glasses_screen').ids.my_image.source = root.ids.my_image.source
+                root.manager.get_screen('glasses_screen').base_img_path = root.ids.my_image.source
+                root.manager.get_screen('glasses_screen').predict()
+
+    RoundedButton1:
+        id: button6
+        pos_hint: {'center_x': 0.5, 'center_y': 0.2}
+        size_hint: 0.45, 0.07
+        font_size: 0.08 * self.width
+        text: 'Take new photo'
+        halign: 'center'
+        valign: 'center'
+        back_color: (1,1,1,1)
+        on_press: root.manager.current = 'make_photo'
+    RoundedButton1:
+        id: button6
+        pos_hint: {'center_x': 0.5, 'center_y': 0.1}
+        size_hint: 0.45, 0.07
+        font_size: 0.08 * self.width
+        text: 'Back to menu'
+        halign: 'center'
+        valign: 'center'
+        back_color: (1,1,1,1)
+        on_press: root.manager.current = 'menu'
+
+<DetermineButton@Button>
+    background_color: (1, 1, 1, 1)
+    background_normal: ''
+    back_color: (1,1,1,1)
+    border_radius: 20
+    color: self.back_color
+    bold: True
+    canvas.before:
+        Color:
+            rgba: self.back_color
+        Line:
+            rounded_rectangle: (self.pos[0], self.pos[1], self.size[0], self.size[1], self.border_radius)
+            width: 1.2
+
+<GalleryUploadScreen>:
+    id: gallery_upload
+    canvas.before:
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: root.gallery_upload_background_source
+    BoxLayout:
+        orientation: "vertical"
+        size: root.width, root.height
+        padding: 80
+        spacing: 60
+        Image:
+            id: my_image
+            source: ""
+
+        FileChooserIconView:
+            id: file_chooser
+            on_selection:
+                gallery_upload.selected(file_chooser.selection)
+                root.manager.get_screen('glasses_screen').selected(file_chooser.selection)
+
+    PredictButton:
+        pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+        id:button 4
+        size_hint: 0.3, 0.07
+        font_size: 0.15 * self.width
+        bold: True
+        text: 'Predict'
+        back_color:(0,0,0,1)
+        on_press:
+            root.manager.current = 'glasses_screen'
+            root.manager.get_screen('glasses_screen').predict()
+    BackButton:
+        pos_hint: {'center_x': 0.5, 'center_y': 0.07}
+        size_hint: 0.45, 0.07
+        font_size: 0.08 * self.width
+        bold: True
+        text: 'Back to menu'
+        halign: 'center'
+        back_color:(0,0,0,1)
+        on_press: root.manager.current = 'menu'
+
+
+<PredictButton@Button>
+    background_color: (0, 0, 0, 0)
+    background_normal: ''
+    back_color: (1,0,1,1)
+    border_radius: 20
+    color: self.back_color
+    bold: True
+    canvas.before:
+        Color:
+            rgba: self.back_color
+        Line:
+            rounded_rectangle: (self.pos[0], self.pos[1], self.size[0], self.size[1], self.border_radius)
+            width: 1.2
+<BackButton@Button>
+    background_color: (0, 0, 0, 0)
+    background_normal: ''
+    back_color: (1,0,1,1)
+    border_radius: [20]
+    canvas.before:
+        Color:
+            rgba: self.back_color
+        RoundedRectangle:
+            size:self.size
+            pos: self.pos
+            radius: self.border_radius
+<GlassesScreen>:
+    id: glasses_screen
+    BoxLayout:
+        orientation: "vertical"
+        size: root.width, root.height
+        padding: 50
+        spacing: 20
+        Image:
+            id: my_image
+            source: ""
+        Label:
+            id: face_type_label
+            pos_hint: {'center_x': 0.5, 'center_y': 0.50}
+            text: "Waiting for your photo..."
+            color: 1,1,1,1
+            size_hint: 0.45, 0.07
+            font_size: 0.08 * self.width
+            bold: True
+            back_color:(0,0,0,1)
+        Label:
+            id: face_type_label
+            pos_hint: {'center_x': 0.5, 'center_y': 0.3}
+            text: "Example glasses for your face shape:"
+            color: 1,1,1,1
+            size_hint: 0.45, 0.07
+            font_size: 0.08 * self.width
+            bold: True
+            back_color:(0,0,0,1)
+
+        BoxLayout:
+            orientation: "horizontal"
+            Button:
+                id: button_glasses_0
+                text: "Select"
+                on_press:
+                    root.manager.get_screen('glasses_screen').add_glasses_to_img(0)
+                background_normal: ""
+                size_hint: .3, .2
+                pos_hint: {"x":.3, "y":.3}
+
+            Button:
+                id: button_glasses_1
+                text: "Select"
+                on_press:
+                    root.manager.get_screen('glasses_screen').add_glasses_to_img(1)
+                background_normal: ""
+                size_hint: .3, .2
+                pos_hint: {"x":.3, "y":.3}
+
+            Button:
+                id: button_glasses_2
+                text: "Select"
+                on_press:
+                    root.manager.get_screen('glasses_screen').add_glasses_to_img(2)
+                background_normal: ""
+                size_hint: .3, .2
+                pos_hint: {"x":.3, "y":.3}
+
+            Button:
+                id: button_glasses_3
+                text: "Select"
+                on_press:
+                    root.manager.get_screen('glasses_screen').add_glasses_to_img(3)
+                background_normal: ""
+                size_hint: .3, .2
+                pos_hint: {"x":.3, "y":.3}
+    RoundedButton1:
+        id: button2
+        pos_hint: {'center_x': 0.5, 'center_y': 0.1}
+        size_hint: 0.45, 0.07
+        font_size: 0.08 * self.width
+        text: 'Back to menu'
+        halign: 'center'
+        valign: 'center'
+        back_color: (1, 1, 1, 1)
+        on_press: root.manager.current = 'menu'
+
+

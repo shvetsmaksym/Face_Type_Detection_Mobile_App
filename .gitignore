@@ -1,10 +1,5 @@
 # folders
-TrainingModels/Data/
-saved_images/
-GlassManipulations/tmp/*.png
-.ipynb_checkpoints/
-
+app_data/tmp/*.png
 
 # files
 *.jpg
-*.ini
